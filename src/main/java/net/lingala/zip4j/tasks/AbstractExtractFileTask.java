@@ -55,6 +55,8 @@ public abstract class AbstractExtractFileTask<T> extends AsyncZipTask<T> {
       if (!outputFile.exists()) {
         if (!outputFile.mkdirs()) {
           throw new ZipException("Could not create directory: " + outputFile);
+        } else {
+          UnzipUtil.applyFileAttributes(fileHeader, outputFile);
         }
       }
     } else if (isSymbolicLink(fileHeader)) {
